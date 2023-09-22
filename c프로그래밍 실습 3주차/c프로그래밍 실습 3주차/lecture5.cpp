@@ -3,7 +3,6 @@
 #include <time.h>
 #include <math.h>
 
-
 int main()
 {
 	int i = 0;
@@ -13,22 +12,23 @@ int main()
 	double count = 0;
 
 	srand((double)time(NULL));
-	while (1)
-	{
-		for (i = 0; i < 100000; i++)
-		{
-			x = (double)rand() / (double)RAND_MAX;
-			y = (double)rand() / (double)RAND_MAX;
-			if (i % 1000 == 0) {
-				printf("%0.0f, 원주율 = %0.15f\n", count, (circle / count) * 4);
+	for (i = 0; i < 1000000000; i++){
+		x = (double)rand() / (double)RAND_MAX;
+		y = (double)rand() / (double)RAND_MAX;
+		if ((x * x) + (y * y) <= 1){
+			circle++;
+		}
+		if (i % 10000000 == 0) {
+			printf("%3d%%% 진행..", int(count)+1);
+			printf("원주율 : %.6f ", ((circle / count) * 4)/10000000);
+			for (int progress = 0; progress < int(count / 5); progress++) {
+				printf("■");
 			}
+			for (int progress_false = 0; progress_false < 20-(int(count / 5)); progress_false++){
+				printf("□");
+			}
+			printf("\n");
 			count++;
-			if ((x * x) + (y * y) <= 1)
-			{
-				circle++;
-			}
 		}
 	}
-
-
 }
