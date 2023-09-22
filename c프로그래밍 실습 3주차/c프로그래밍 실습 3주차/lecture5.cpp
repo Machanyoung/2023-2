@@ -19,6 +19,9 @@ int main()
 		{
 			x = (double)rand() / (double)RAND_MAX;
 			y = (double)rand() / (double)RAND_MAX;
+			if (i % 1000 == 0) {
+				printf("%0.0f, 원주율 = %0.15f\n", count, (circle / count) * 4);
+			}
 			count++;
 			if ((x * x) + (y * y) <= 1)
 			{
@@ -27,5 +30,5 @@ int main()
 		}
 	}
 
-	printf("%0.0f, 원주율 = %0.15f\n", count, (circle / count) * 4);
+
 }
