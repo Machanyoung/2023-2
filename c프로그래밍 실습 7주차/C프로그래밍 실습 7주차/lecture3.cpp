@@ -14,11 +14,47 @@ void print_list(NODE* head) {
 		printf("%d", p->data);
 	}
 }
+
+void insert_node_last(NODE* head, int data) {
+	NODE* new_node = (NODE*)malloc(sizeof(NODE));
+	new_node->data = data;
+	NODE* p = head;
+	while (p->next != NULL) {
+		p = p->next;
+	}
+	p->next = new_node;
+	new_node->next = NULL;
+}
+
+void insert_node_first(NODE* head, int data) {
+	NODE* new_node = (NODE*)malloc(sizeof(NODE));
+	new_node->data = data;
+	
+	new_node->next = head->next;
+	head->next = new_node;
+}
+
+void delet_node_first(NODE* head) {
+	NODE* p = head->next->next;
+	free(head->next);
+	head->next = p;
+}
+
+void delet_node_last(NODE* head) {
+	NODE* p_prev;
+	NODE* p = head;
+	while (p->next != NULL) {
+		p_prev = p;
+		p = p->next;
+	}
+	free(p);
+}
+
 int main() {
 	NODE* head;
 	head = (NODE*)malloc(sizeof(NODE));
 	head->next = NULL;
-	//원래는 (*head).next = NULL; 과 같이 next에 접근해야하나, ->를 이용해 포인터가 구조체인경우에 참조해올 수 있다.//
+	//원래는 (*head).next = NULL; 과 같이 next에 접근해야하나, ->를 이용해 포인터가 구조체인 경우에 참조해올 수 있다.//
 
 	NODE* n1 = (NODE*)malloc(sizeof(NODE));
 	n1->data = 1;
@@ -37,6 +73,16 @@ int main() {
 
 	print_list(head);
 
+	insert_node_last(head, 4);
+	insert_node_last(head, 5);
+
+	insert_node_first(head, 6);
+
+	delet_node_first(head);
+
+	delet_node_last(head);
+
+	print_list(head);
 	
 	return 0;
 }
